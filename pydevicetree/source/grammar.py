@@ -21,8 +21,22 @@ p.ParserElement.enablePackrat(cache_bound)
 
 node_name = p.Word(p.alphanums + ",.-+_") ^ p.Literal("/")
 integer = p.pyparsing_common.integer ^ (p.Literal("0x").suppress() + p.pyparsing_common.hex_integer)
-unit_address = p.pyparsing_common.hex_integer
-node_handle = node_name("node_name") + p.Optional(p.Literal("@") + unit_address("address"))
+hex_address_expr = p.Regex(r'(?P<base>[0-9A-Fa-f]+)(?:\.(?P<extension>[0-9]+))?')
+
+def parse_hex_address(tokens):
+    base_str = tokens['base']
+    extension_str = tokens.get('extension')
+    if extension_str is None:
+        extension_val = 0
+    else:
+        extension_val = int(extension_str)
+    if extension_val == 0:
+        return int(base_str, 16)
+    return (int(base_str, 16), extension_val)
+
+hex_address_expr.setParseAction(parse_hex_address)
+
+node_handle = node_name("node_name") + p.Optional(p.Literal("@") + hex_address_expr("address"))
 property_name = p.Word(p.alphanums + ",.-_+?#")
 label = p.Word(p.alphanums + "_").setResultsName("label")
 label_creation = p.Combine(label + p.Literal(":"))

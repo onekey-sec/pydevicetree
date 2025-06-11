@@ -51,6 +51,17 @@ class TestDevicetree(unittest.TestCase):
                 /delete-node/ &delete_label;
                 /delete-node/ delete-by-name;
             };
+            fracdiv0@f801c700.0 {
+                #clock-cells = <0x00>;
+                reg = <0xf801c700 0x100>;
+                clock_id = <0x00>;
+                divisors = <0x05 0x04>;
+                divfrac_max_fixed = <0x00>;
+                divfrac_width = <0x10>;
+                divfrac = <0x11aa 0x10000>;
+                clocks = <0x07 0x12>;
+                phandle = <0x05>;
+            };
         };
         """
         self.tree = Devicetree.from_dts(self.source)
