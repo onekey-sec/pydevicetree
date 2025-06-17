@@ -69,6 +69,10 @@ class TestDevicetree(unittest.TestCase):
             eqep@0x48300180 {
 				compatible = "x";
 			};
+            pruss_soc_bus@4b226000 {
+                compatible = "ti,am5728-pruss-soc-bus";
+                reg = "K\\"`", "", "", " ";
+            };
         };
         """
         self.tree = Devicetree.from_dts(self.source)

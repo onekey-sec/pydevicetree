@@ -40,7 +40,7 @@ node_handle = node_name("node_name") + p.Optional(p.Literal("@") + hex_address_e
 property_name = p.Word(p.alphanums + ",.-_+?#")
 label = p.Word(p.alphanums + "_").setResultsName("label")
 label_creation = p.Combine(label + p.Literal(":"))
-string = p.QuotedString(quoteChar='"')
+string = p.QuotedString(quoteChar='"', escChar='\\')
 stringlist = p.delimitedList(string)
 node_path = p.Combine(p.Literal("/") + \
         p.delimitedList(node_handle, delim="/", combine=True)).setResultsName("path")
