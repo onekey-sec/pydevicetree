@@ -21,7 +21,7 @@ p.ParserElement.enablePackrat(cache_bound)
 
 node_name = p.Word(p.alphanums + ",.-+_") ^ p.Literal("/")
 integer = p.pyparsing_common.integer ^ (p.Literal("0x").suppress() + p.pyparsing_common.hex_integer)
-hex_address_expr = p.Regex(r'(?P<base>[0-9A-Fa-f]+)(?:\.(?P<extension>[0-9]+))?')
+hex_address_expr = p.Regex(r'(?P<base>[0-9A-Fa-f]+)(?:(\.|\,)(?P<extension>[0-9]+))?')
 
 def parse_hex_address(tokens):
     base_str = tokens['base']

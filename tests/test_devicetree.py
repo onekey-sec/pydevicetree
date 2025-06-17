@@ -62,6 +62,10 @@ class TestDevicetree(unittest.TestCase):
                 clocks = <0x07 0x12>;
                 phandle = <0x05>;
             };
+            nand@0,0 {
+				compatible = "ti,omap2-nand";
+				reg = <0x00 0x00 0x04>;
+			};
         };
         """
         self.tree = Devicetree.from_dts(self.source)
