@@ -66,6 +66,9 @@ class TestDevicetree(unittest.TestCase):
 				compatible = "ti,omap2-nand";
 				reg = <0x00 0x00 0x04>;
 			};
+            eqep@0x48300180 {
+				compatible = "x";
+			};
         };
         """
         self.tree = Devicetree.from_dts(self.source)
